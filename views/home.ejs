@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+</head>
+<body>
+    <!--to include the other html files in the mail file-->
+    <%- include ('./partials/nav') %>
+    <div class="container mt-3">
+        <div class="row row-cols-4 g-4">
+            
+        
+       <% reviews.forEach(review => { %>
+        <div class="col">
+
+        
+        <div class="card" style="width: 18rem;height: 300px;">
+            <img src="<%= review.coverImageURL %>" class="card-img-top" style="max-height: 200px; min-height:200px; object-fit: cover;" alt="review Cover Image">
+            <div class="card-body">
+              <h5 class="card-title"><%= review.title %></h5>
+              
+              <a href="/review/<%= review._id %>" class="btn btn-primary">Read</a>
+            </div>
+          
+          </div>
+        </div>
+       <% }) %> 
+    </div>
+    </div>
+    <%- include('./partials/scripts') %>  
+</body>
+</html>

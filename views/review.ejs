@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Review</title>
+    <style>
+        .container img {
+            max-width: 35%; /* Set the maximum width to 100% of the container */
+            height: auto; /* Maintain the aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <!--to include the other html files in the mail file-->
+    <%- include ('./partials/nav') %>
+    <div class="container mt-4">
+        <h1><%= review.title %></h1>
+        <h2> Rating : <%= review.rating %>/5</h2>
+        <img src="<%= review.coverImageURL%>">
+        <p><%= review.body %></p>
+        <div>
+            <p>Author : <%= review.createdBy.fullName %></p>
+        </div>
+        
+    </div>
+    <div class="container mt-3">
+        <h2>Comments (<%= comment.length %>)</h2>
+        <% if (locals.user) { %>
+            
+            <form action="/review/comment/<%= review._id %>" method="POST" >
+
+            
+              
+
+                <!--Adding email-->
+                <div class="mb-3">
+                  <input 
+                  type="text"
+                  name="content"
+                  class="form-control"
+                  placeholder="Enter your comment"/>
+                  
+    
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+                
+        <% } %>
+        <div class="mt-3">
+            
+            <% comment.forEach(comment => { %>
+             <%= comment.createdBy.fullName %>:<p><%= comment.content %></p>
+            <% }) %>
+        </div>
+        
+
+            <!--Adding password-->
+    </div>
+    <%- include('./partials/scripts') %> 
+</body>
+</html>
